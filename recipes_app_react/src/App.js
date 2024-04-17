@@ -1,16 +1,15 @@
-import React from "react";
-import Card from "./components/Card"
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import Home from "./pages/Home";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "./components/Card";
 
 const App = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("https://www.themealdb.com/api/json/v1/1/search.php?s=tomato").then((res) => setData(res.data));
+  }, []);
+
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<Home />} />
-    //     <Route path="*" element={<Home />} />
-    //   </Routes>
-    // </BrowserRouter>
     <div>
       <h1>Recipes App - React</h1>
       <div className="cards-container">
