@@ -6,15 +6,17 @@ const App = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("https://www.themealdb.com/api/json/v1/1/search.php?s=tomato").then((res) => setData(res.data));
+    axios.get("https://www.themealdb.com/api/json/v1/1/search.php?s=tomato").then((res) => setData(res.data.meals));
   }, []);
 
   return (
     <div>
       <h1>Recipes App - React</h1>
-      <div className="cards-container">
-        <Card />
-      </div>
+      <ul>
+          {data.map((meal, index) => (
+            <Card key={index} meal={meal} />
+          ))}
+        </ul>
     </div>
   );
 };
