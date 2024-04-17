@@ -12,6 +12,9 @@ const App = () => {
   return (
     <div>
       <h1>Recipes App - React</h1>
+      <form>
+        <input type="text" id="search" autoComplete="off" placeholder="Type the name of an ingredient" />
+      </form>
       <ul>
           {data.map((meal, index) => (
             <Card key={index} meal={meal} />
