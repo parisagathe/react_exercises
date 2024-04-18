@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+countries_exercise_1/node_modules
+countries_exercise_2/node_modules
+recipes_app/node_modules
 /.pnp
 .pnp.js
 
