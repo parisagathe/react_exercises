@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import TableLine from "./TableLine";
 
 const Table = ({ coinsData }) => {
 
     const [rangeNumber, setRangeNumber] = useState(100);
-    const tableHeader = ["Prix", "MarketCap", "Volume", "1h", "1d", "1m", "1y", "ATH"];
+    const tableHeader = ["Prix", "MarketCap", "Volume", "1h", "1d", "1w", "1m", "1y", "ATH"];
     const [orderBy, setOrderBy] = useState("");
 
     return (
@@ -31,9 +32,7 @@ const Table = ({ coinsData }) => {
                 </ul>
                 {coinsData && coinsData
                 .slice(0, rangeNumber)
-                .map((coin) => (
-                    <h1>{coin.symbol}</h1>
-                ))}
+                .map((coin, index) => <TableLine coin={coin} index={index} />)}
             </div>
         </div>
     );
