@@ -2,8 +2,12 @@ import React from "react";
 
 const ToTop = () => {
     return (
-        <div className="top" onClick={() => window.scrollTo(0, 0)}>
-            <img src="./assets/arrow-icon.svg" alt="Arrow up" />
+        <div className="top">
+            <img 
+            src="./assets/arrow-icon.svg" 
+            alt="Arrow up"
+            onClick={() => window.scrollTo(0, 0)}
+            />
         </div>
     );
 };

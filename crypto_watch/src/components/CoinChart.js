@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
-import colors from "../styles/index.scss";
+import colors from "../styles/_settings.scss";
 
 const CoinChart = ({ coinId, coinName }) => {
     const [duration, setDuration] = useState(30);
@@ -20,6 +20,7 @@ const CoinChart = ({ coinId, coinName }) => {
 
     useEffect(() => {
         let dataArray = [];
+
         axios.get(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${duration}${duration > 32 ? "&interval=daily" : ""}`)
         .then((res) => {
             for (let i = 0; i < res.data.prices.length; i++) {
@@ -40,10 +41,15 @@ const CoinChart = ({ coinId, coinName }) => {
             <div className="btn-container">
                 {headerData.map((el) => {
                     return (
-                        <div key={el[0]} htmlFor={"btn" + el[0]} onClick={() => setDuration(el[0])} className={el[0] === duration ? "active-btn" : ""}>
+                        <div 
+                        key={el[0]}
+                        htmlFor={"btn" + el[0]}
+                        onClick={() => setDuration(el[0])}
+                        className={el[0] === duration ? "active-btn" : ""}
+                        >
                             {el[1]}
                         </div>
-                    )
+                    );
                 })}
             </div>
             <AreaChart 

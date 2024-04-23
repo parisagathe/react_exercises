@@ -20,6 +20,34 @@ const Table = ({ coinsData }) => {
         "ATH",
     ];
 
+    const excludeCoin = (coin) => {
+        if (
+            coin === "usdt" ||
+            coin === "usdc" ||
+            coin === "busd" ||
+            coin === "dai" ||
+            coin === "ust" ||
+            coin === "mim" ||
+            coin === "tusd" ||
+            coin === "usdp" ||
+            coin === "usdn" ||
+            coin === "fei" ||
+            coin === "tribe" ||
+            coin === "gusd" ||
+            coin === "frax" ||
+            coin === "lusd" ||
+            coin === "husd" ||
+            coin === "ousd" ||
+            coin === "xsgd" ||
+            coin === "usdx" ||
+            coin === "eurs"
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
     return (
             <div className="table-container">
                 <ul className="table-header">
@@ -37,7 +65,8 @@ const Table = ({ coinsData }) => {
                         min="1"
                         max="250"
                         value={rangeNumber}
-                        onChange={(e) => setRangeNumber(e.target.value)} />
+                        onChange={(e) => setRangeNumber(e.target.value)} 
+                        />
                         <ToTop />
                     </div>
                     {tableHeader.map((el) => (
