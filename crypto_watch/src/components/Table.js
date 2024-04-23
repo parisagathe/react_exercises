@@ -4,38 +4,68 @@ import ToTop from "./ToTop";
 
 const Table = ({ coinsData }) => {
 
-    const [rangeNumber, setRangeNumber] = useState(100);
-    const tableHeader = ["Prix", "MarketCap", "Volume", "1h", "1d", "1w", "1m", "1y", "ATH"];
     const [orderBy, setOrderBy] = useState("");
+    const [rangeNumber, setRangeNumber] = useState(100);
+
+    const tableHeader = [
+        "Prix",
+        "MarketCap",
+        "Volume",
+        "1h",
+        "1d",
+        "1w",
+        "1m",
+        "1y",
+        "ATH",
+    ];
 
     return (
-        <div>
             <div className="table-container">
                 <ul className="table-header">
                     <div className="range-container">
                         <span>
-                            Top{" "} <input type="text" value={rangeNumber} onChange={(e) => setRangeNumber(e.target.value)} />
+                            Top{" "} 
+                            <input 
+                            type="text"
+                            value={rangeNumber}
+                            onChange={(e) => setRangeNumber(e.target.value)}
+                            />
                         </span>
-                        <input type="range" min="1" max="250" value={rangeNumber} onChange={(e) => setRangeNumber(e.target.value)} />
+                        <input 
+                        type="range"
+                        min="1"
+                        max="250"
+                        value={rangeNumber}
+                        onChange={(e) => setRangeNumber(e.target.value)} />
                         <ToTop />
                     </div>
                     {tableHeader.map((el) => (
                         <li key={el}>
-                            <input type="radio" name="header-element" id={el} defaultChecked={el === orderBy || el === orderBy + "reverse" ? true : false} onClick={() => {
+                            <input
+                            defaultChecked={
+                                el === orderBy || el === orderBy + "reverse" ? 
+                                true : false
+                            }
+                            onClick={() => {
                                 if (orderBy === el) {
                                     setOrderBy(el + "reverse")
                                 } else {
                                     setOrderBy(el);
                                 }
-                            }} />
+                            }}
+                            type="radio"
+                            name="header-el"
+                            id={el}
+                            />
                             <label htmlFor={el}>{el}</label>
                         </li>
                     ))}
                 </ul>
-                {coinsData && coinsData
+                {coinsData &&
+                coinsData
                 .slice(0, rangeNumber)
                 .sort((a, b) => {
-                    switch(orderBy) {
+                    switch (orderBy) {
                         case "Prix": 
                             return b.current_price - a.current_price;
                         case "Volume":
@@ -47,12 +77,12 @@ const Table = ({ coinsData }) => {
                                   b.price_change_percentage_1h_in_currency -
                                   a.price_change_percentage_1h_in_currency
                                 );
-                        case "1j":
+                        case "1d":
                             return (
                                   b.market_cap_change_percentage_24h -
                                   a.market_cap_change_percentage_24h
                                 );
-                        case "1s":
+                        case "1w":
                             return (
                                   b.price_change_percentage_7d_in_currency -
                                   a.price_change_percentage_7d_in_currency
@@ -67,7 +97,7 @@ const Table = ({ coinsData }) => {
                                   b.price_change_percentage_200d_in_currency -
                                   a.price_change_percentage_200d_in_currency
                                 );
-                        case "1a":
+                        case "1y":
                             return (
                                   b.price_change_percentage_1y_in_currency -
                                   a.price_change_percentage_1y_in_currency
@@ -87,12 +117,12 @@ const Table = ({ coinsData }) => {
                                   a.price_change_percentage_1h_in_currency -
                                   b.price_change_percentage_1h_in_currency
                                 );
-                        case "1jreverse":
+                        case "1dreverse":
                             return (
                                   a.market_cap_change_percentage_24h -
                                   b.market_cap_change_percentage_24h
                                 );
-                        case "1sreverse":
+                        case "1wreverse":
                             return (
                                   a.price_change_percentage_7d_in_currency -
                                   b.price_change_percentage_7d_in_currency
@@ -107,7 +137,7 @@ const Table = ({ coinsData }) => {
                                   a.price_change_percentage_200d_in_currency -
                                   b.price_change_percentage_200d_in_currency
                                 );
-                        case "1areverse":
+                        case "1yreverse":
                             return (
                                   a.price_change_percentage_1y_in_currency -
                                   b.price_change_percentage_1y_in_currency
@@ -115,12 +145,13 @@ const Table = ({ coinsData }) => {
                         case "ATHreverse":
                             return a.ath_change_percentage - b.ath_change_percentage;
                         default:
-                                null;
+                            return null;
                     }
                 })
-                .map((coin, index) => <TableLine coin={coin} index={index} />)}
+                .map((coin, index) => (
+                <TableLine coin={coin} key={coin.id} index={index} />
+                ))}
             </div>
-        </div>
     );
 };
 
